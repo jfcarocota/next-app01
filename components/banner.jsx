@@ -6,7 +6,13 @@ export default class Banner extends Component {
     render = ()=> (
         <Fragment>
             <Advertisement unit='top banner' centered style={{width: '100%'}}>
-                <Header color='yellow' size='huge' icon textAlign='center' style={{zIndex: '1000', position: 'absolute', marginBottom: 0, width: '100%', height: 'auto'}}>
+                <Header color='yellow' size='huge' icon textAlign='center' style={{
+                    zIndex: '1000', 
+                    position: 'absolute', 
+                    marginBottom: 0, 
+                    width: '100%', 
+                    height: 'auto'
+                }}>
                     <Image src='catlogo.jpg' circular size='massive'/>
                     <Header.Content>Comida Espongosita</Header.Content>
                 </Header>

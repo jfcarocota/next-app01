@@ -35,6 +35,7 @@ export default class MainGrid extends Component {
                 items: products.map((product, i) => (
                     <Item
                     key={i}
+                    id={product.id}
                     image={product.imageUrl}
                     title={product.name.substr(0, 20)}
                     descp={product.description}

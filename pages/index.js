@@ -8,7 +8,7 @@ import MainMenu from '../components/mainmenu';
 import Footer from '../components/footer';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: process.env.NEXT_PUBLIC_API_URL,
   cache: new InMemoryCache()
 });
 

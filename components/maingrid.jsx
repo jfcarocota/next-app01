@@ -46,7 +46,7 @@ export default class MainGrid extends Component {
 
     render = ()=> (
         <Container>
-            <CardGroup centered itemsPerRow={this.state.columns} >
+            <CardGroup itemsPerRow={this.state.columns}>
                 {this.state.items}
             </CardGroup>
         </Container>

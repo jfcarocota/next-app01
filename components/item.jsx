@@ -1,4 +1,4 @@
-import {Card, Header, Image, Button} from 'semantic-ui-react';
+import {Card, Header, Image, Button, Rating} from 'semantic-ui-react';
 import React, {Component} from 'react';
 import {withRouter, Router} from 'next/router'
 
@@ -15,7 +15,7 @@ class Item extends Component {
     click = () =>{
         //console.log(this.props.router);
         const {id} = this.state;
-        this.props.router.push({pathname: '/product', query:{id}});
+        this.props.router.push({pathname: '/product', query:{id}, state: {id}});
     }
 
     render = ()=> (
@@ -24,6 +24,7 @@ class Item extends Component {
             <Card.Content>
                 <Card.Header>{this.state.title}</Card.Header>
                 <Card.Meta>Croquestas</Card.Meta>
+                <Rating icon='star' defaultRating={3} maxRating={5} disabled/>
                 {/*<Card.Description>
                     {this.state.descp}
                 </Card.Description>*/}

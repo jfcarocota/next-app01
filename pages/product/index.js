@@ -35,7 +35,7 @@ class Product extends Component {
 
   componentDidMount = ()=>{
     const {id} = this.props.router.query;
-    console.log(this.props.router.query);
+    console.log(this.props.router);
     //console.log(client);
     client.query({
       query: GET_PRODUCT_BY_ID,

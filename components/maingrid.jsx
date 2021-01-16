@@ -1,7 +1,6 @@
 import { Container, Grid, GridColumn, GridRow, Button, CardGroup} from 'semantic-ui-react';
 import React, {Component} from 'react';
 import { gql, getApolloContext } from '@apollo/client';
-import _ from "lodash";
 import Item from './item';
 
 const GET_PRODUCTS = gql`

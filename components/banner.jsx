@@ -13,7 +13,7 @@ export default class Banner extends Component {
                     width: '100%', 
                     height: 'auto'
                 }}>
-                    <Image src='catlogo.jpg' circular size='massive'/>
+                    <Image src='catlogo.jpg' circular size='massive' as='a' href='/'/>
                     <Header.Content>Comida Espongosita</Header.Content>
                 </Header>
                 <Image src='catsbanner3.jpg' fluid centered/>

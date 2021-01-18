@@ -1,12 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { ApolloClient, ApolloProvider, InMemoryCache, gql} from '@apollo/client';
-import { Container, Grid, GridColumn, Image, Dimmer, Loader, Segment  } from 'semantic-ui-react';
+import { Container, Grid, GridColumn, Image, Header, Divider, Card, Button, Input, Icon, Label } from 'semantic-ui-react';
 import {withRouter} from 'next/router'
 import ImageList from '../../components/product/imagelist';
 import Loading from '../../components/loading';
-import Banner from '../../components/banner';
-import Footer from "../../components/footer";
+import Mainview from '../../components/mainview';
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URL,
@@ -29,8 +28,11 @@ class Product extends Component {
 
   state = {
     id: this.props.id ? this.props.id : '',
+    price: '',
+    description: '',
     imageUrl: this.props.imageUrl ? this.props.imageUrl : '',
     images: [],
+    quantity: 1,
     loading: true
   }
 
@@ -46,9 +48,9 @@ class Product extends Component {
       }
     }).then(res => {
       //console.log(res.data.getProductById);
-      const {imageUrl} = res.data.getProductById;
+      const {imageUrl, price, description} = res.data.getProductById;
       this.state.images.push(imageUrl);
-      this.setState({id, imageUrl, loading: false});
+      this.setState({id, price, description, imageUrl, loading: false});
     });
   }
 
@@ -57,23 +59,66 @@ class Product extends Component {
     return id;
   }
 
+  quantityChange = e => this.setState({quantity: e.target.value < 1 ? 1 : e.target.value})
+
   productRender = ()=> {
     //console.log(this.props);
     if(!this.state.loading){
       return (
-        <Container>
-          <GridColumn width={1}>
-            <ImageList images={this.state.images}/>
-          </GridColumn>
-          <GridColumn width={3}>
-            <Image src={this.state.imageUrl} size='large'/>
-          </GridColumn>
-          <GridColumn width={3}>
-
-          </GridColumn>
-          <GridColumn width={2}>
-
-          </GridColumn>
+        <Container style={{width: '85%'}}>
+          <Grid columns={3} centered>
+            <Grid.Row>
+              <GridColumn width={1}>
+                <ImageList images={this.state.images}/>
+              </GridColumn>
+              <GridColumn width={6}>
+                <Image src={this.state.imageUrl} size='large'/>
+              </GridColumn>
+              <GridColumn width={4}>
+                <Container>
+                  <p>
+                    Precio: <strong>{`$${this.state.price}`}</strong>
+                  </p>
+                  <Divider/>
+                  <Header>Sobre este producto</Header>
+                  <p>{this.state.description}</p>
+                </Container>
+              </GridColumn>
+              <GridColumn width={4}>
+              <Card>
+                <Card.Content>
+                  <Card.Header>{`$${this.state.price}`}</Card.Header>
+                  <Card.Meta>Envio gratis</Card.Meta>
+                  <Card.Description>
+                    Llega entre martes y jueves.
+                  </Card.Description>
+                  <Divider hidden/>
+                  <Header size='large' color='green' content='Disponible'/>
+                  <Divider hidden/>
+                  <Input label='Cantidad' type='number' value={this.state.quantity} onChange={this.quantityChange}/>
+                </Card.Content>
+                <Card.Content extra>
+                  <Divider hidden/>
+                  <Container fluid textAlign='center'>
+                    <Button as='div' labelPosition='right' color='orange'>
+                      <Button color='orange'>
+                        <Icon name='cart' />
+                      </Button>
+                      <Label basic color='orange' pointing='left' content='Agregar al carrito' />
+                    </Button>
+                    <Divider hidden/>
+                    <Button as='div' labelPosition='right' color='orange'>
+                      <Button color='orange'>
+                        <Icon name='caret square right'/>
+                      </Button>
+                      <Label basic color='orange' pointing='left' content='Comprar ahora' />
+                    </Button>
+                  </Container>
+                </Card.Content>
+              </Card>
+              </GridColumn>
+            </Grid.Row>
+          </Grid>
         </Container>
       );
     }else{
@@ -85,19 +130,9 @@ class Product extends Component {
 
     render = ()=> (
       <ApolloProvider client={client}>
-        <Banner/>
-        <Grid relaxed>
-          <Grid.Row>
-            {
-              this.productRender()
-            }
-          </Grid.Row>
-          <Grid.Row>
-            <GridColumn>
-              <Footer/>
-            </GridColumn>
-          </Grid.Row>
-        </Grid>
+        <Mainview>
+          {this.productRender()}
+        </Mainview>
       </ApolloProvider>
     );
 }

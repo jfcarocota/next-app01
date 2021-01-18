@@ -6,6 +6,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 import { Divider, Grid, GridColumn} from 'semantic-ui-react';
 import MainMenu from '../components/mainmenu';
 import Footer from '../components/footer';
+import Mainview from '../components/mainview';
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URL,
@@ -15,23 +16,14 @@ const client = new ApolloClient({
 export default class Home extends Component {
   render = ()=> (
     <ApolloProvider client={client}>
-      <Banner />
-      <Divider hidden/>
-      <Grid relaxed>
-        <Grid.Row>
-          <GridColumn width={3} style={{backgroundColor: '#f5f5f5'}}>
-            <MainMenu/>
-          </GridColumn>
-          <GridColumn width={10}>
-            <MainGrid columns={3}/>
-          </GridColumn>
-        </Grid.Row>
-        <Grid.Row>
-          <GridColumn>
-            <Footer/>
-          </GridColumn>
-        </Grid.Row>
-      </Grid>
+      <Mainview>
+        <GridColumn width={3} style={{backgroundColor: '#f5f5f5'}}>
+          <MainMenu/>
+        </GridColumn>
+        <GridColumn width={10}>
+          <MainGrid columns={3}/>
+        </GridColumn>
+      </Mainview>
     </ApolloProvider>
   );
 }

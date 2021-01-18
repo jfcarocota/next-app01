@@ -15,7 +15,7 @@ class Item extends Component {
     click = () =>{
         //console.log(this.props.router);
         const {id} = this.state;
-        this.props.router.push({pathname: '/product', query:{id}, state: {id}});
+        this.props.router.push(`/products/${id}`);
     }
 
     render = ()=> (

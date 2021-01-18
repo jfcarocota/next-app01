@@ -2,11 +2,11 @@ import React, {Component, Fragment} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { ApolloClient, ApolloProvider, InMemoryCache, gql} from '@apollo/client';
 import { Container, Grid, GridColumn, Image, Dimmer, Loader, Segment  } from 'semantic-ui-react';
-import Footer from '../../components/footer';
 import {withRouter} from 'next/router'
-import Banner from '../../components/banner';
 import ImageList from '../../components/product/imagelist';
 import Loading from '../../components/loading';
+import Banner from '../../components/banner';
+import Footer from "../../components/footer";
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URL,
@@ -28,12 +28,14 @@ const GET_PRODUCT_BY_ID = gql`
 class Product extends Component {
 
   state = {
-    id: '',
-    imageUrl: '',
+    id: this.props.id ? this.props.id : '',
+    imageUrl: this.props.imageUrl ? this.props.imageUrl : '',
+    images: [],
     loading: true
   }
 
   componentDidMount = ()=>{
+    //this.get
     const {id} = this.props.router.query;
     console.log(this.props.router);
     //console.log(client);
@@ -45,16 +47,23 @@ class Product extends Component {
     }).then(res => {
       //console.log(res.data.getProductById);
       const {imageUrl} = res.data.getProductById;
+      this.state.images.push(imageUrl);
       this.setState({id, imageUrl, loading: false});
     });
   }
 
+  static getInitialProps({query}) {
+    const {id} = query;
+    return id;
+  }
+
   productRender = ()=> {
+    //console.log(this.props);
     if(!this.state.loading){
       return (
         <Container>
           <GridColumn width={1}>
-            <ImageList/>
+            <ImageList images={this.state.images}/>
           </GridColumn>
           <GridColumn width={3}>
             <Image src={this.state.imageUrl} size='large'/>

@@ -1,7 +1,8 @@
 import { Image, Advertisement, Header } from 'semantic-ui-react';
 import React, {Component, Fragment} from 'react';
+import { withRouter } from 'next/router';
 
-export default class Banner extends Component {
+class Banner extends Component {
 
     render = ()=> (
         <Fragment>
@@ -13,11 +14,13 @@ export default class Banner extends Component {
                     width: '100%', 
                     height: 'auto'
                 }}>
-                    <Image src='catlogo.jpg' circular size='massive' as='a' href='/'/>
+                    <Image src='/catlogo.jpg' circular size='massive' as='a' href='/'/>
                     <Header.Content>Comida Espongosita</Header.Content>
                 </Header>
-                <Image src='catsbanner3.jpg' fluid centered/>
+                <Image src='/catsbanner3.jpg' fluid centered/>
             </Advertisement>
         </Fragment>
     );
 }
+
+export default withRouter(Banner);

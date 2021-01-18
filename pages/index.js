@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Banner from '../components/banner';
 import MainGrid from '../components/maingrid';
 import { ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
-import { Divider, Grid, GridColumn, Image } from 'semantic-ui-react';
+import { Divider, Grid, GridColumn} from 'semantic-ui-react';
 import MainMenu from '../components/mainmenu';
 import Footer from '../components/footer';
 

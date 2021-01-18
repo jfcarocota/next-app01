@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Grid, Header, List} from 'semantic-ui-react';
+import { Container, Grid, Header, List } from 'semantic-ui-react';
 
 import { withRouter } from "next/router";
 

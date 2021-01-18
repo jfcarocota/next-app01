@@ -6,6 +6,7 @@ import {withRouter} from 'next/router'
 import ImageList from '../../components/product/imagelist';
 import Loading from '../../components/loading';
 import Mainview from '../../components/mainview';
+import StarsRating from '../../components/starsrating';
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URL,
@@ -79,6 +80,7 @@ class Product extends Component {
                   <p>
                     Precio: <strong>{`$${this.state.price}`}</strong>
                   </p>
+                  <StarsRating/>
                   <Divider/>
                   <Header>Sobre este producto</Header>
                   <p>{this.state.description}</p>

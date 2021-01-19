@@ -1,6 +1,6 @@
-import {Card, Header, Image, Button, Rating} from 'semantic-ui-react';
+import {Card, Header, Image, Button} from 'semantic-ui-react';
 import React, {Component} from 'react';
-import {withRouter, Router} from 'next/router'
+import {withRouter} from 'next/router'
 import StarsRating from './starsrating';
 
 class Item extends Component {

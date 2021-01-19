@@ -7,6 +7,9 @@ import ImageList from '../../components/product/imagelist';
 import Loading from '../../components/loading';
 import Mainview from '../../components/mainview';
 import StarsRating from '../../components/starsrating';
+import Comments from '../../components/comments';
+import ProductInfo from '../../components/product/productinfo';
+import CardPay from '../../components/product/cardpay';
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URL,
@@ -76,51 +79,14 @@ class Product extends Component {
                 <Image src={this.state.imageUrl} size='large'/>
               </GridColumn>
               <GridColumn width={4}>
-                <Container>
-                  <p>
-                    Precio: <strong>{`$${this.state.price}`}</strong>
-                  </p>
-                  <StarsRating/>
-                  <Divider/>
-                  <Header>Sobre este producto</Header>
-                  <p>{this.state.description}</p>
-                </Container>
+                <ProductInfo price={this.state.price} description={this.state.description}/>
               </GridColumn>
               <GridColumn width={4}>
-              <Card>
-                <Card.Content>
-                  <Card.Header>{`$${this.state.price}`}</Card.Header>
-                  <Card.Meta>Envio gratis</Card.Meta>
-                  <Card.Description>
-                    Llega entre martes y jueves.
-                  </Card.Description>
-                  <Divider hidden/>
-                  <Header size='large' color='green' content='Disponible'/>
-                  <Divider hidden/>
-                  <Input label='Cantidad' type='number' value={this.state.quantity} onChange={this.quantityChange}/>
-                </Card.Content>
-                <Card.Content extra>
-                  <Divider hidden/>
-                  <Container fluid textAlign='center'>
-                    <Button as='div' labelPosition='right' color='orange'>
-                      <Button color='orange'>
-                        <Icon name='cart' />
-                      </Button>
-                      <Label basic color='orange' pointing='left' content='Agregar al carrito' />
-                    </Button>
-                    <Divider hidden/>
-                    <Button as='div' labelPosition='right' color='orange'>
-                      <Button color='orange'>
-                        <Icon name='caret square right'/>
-                      </Button>
-                      <Label basic color='orange' pointing='left' content='Comprar ahora' />
-                    </Button>
-                  </Container>
-                </Card.Content>
-              </Card>
+                <CardPay price={this.state.price}/>
               </GridColumn>
             </Grid.Row>
           </Grid>
+          <Comments/>
         </Container>
       );
     }else{

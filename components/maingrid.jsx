@@ -1,7 +1,8 @@
-import { Container, Grid, GridColumn, GridRow, Button, CardGroup} from 'semantic-ui-react';
+import { Container, CardGroup} from 'semantic-ui-react';
 import React, {Component} from 'react';
 import { gql, getApolloContext } from '@apollo/client';
 import Item from './item';
+import Loading from "../components/loading";
 
 const GET_PRODUCTS = gql`
     {
@@ -21,7 +22,8 @@ export default class MainGrid extends Component {
 
     state = {
         items: [],
-        columns: this.props.columns ? this.props.columns : 1
+        columns: this.props.columns ? this.props.columns : 1,
+        loading: true
     }
 
     componentDidMount = ()=>{
@@ -40,15 +42,21 @@ export default class MainGrid extends Component {
                     descp={product.description}
                     price={`${Number(product.price)} MXN`}
                     />   
-            ))});
+                )), 
+                loading: false});
         });
     }
 
-    render = ()=> (
-        <Container>
-            <CardGroup itemsPerRow={this.state.columns}>
-                {this.state.items}
-            </CardGroup>
-        </Container>
-    );
+    render = ()=> {
+        if(this.state.loading) return (
+            <Loading />
+        );
+        return (
+            <Container>
+                <CardGroup itemsPerRow={this.state.columns}>
+                    {this.state.items}
+                </CardGroup>
+            </Container>
+        );
+    }
 }

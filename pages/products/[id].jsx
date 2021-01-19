@@ -10,6 +10,7 @@ import StarsRating from '../../components/starsrating';
 import Comments from '../../components/comments';
 import ProductInfo from '../../components/product/productinfo';
 import CardPay from '../../components/product/cardpay';
+import Specifications from '../../components/product/specifications';
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URL,
@@ -86,6 +87,7 @@ class Product extends Component {
               </GridColumn>
             </Grid.Row>
           </Grid>
+          <Specifications/>
           <Comments/>
         </Container>
       );
